@@ -17,6 +17,7 @@
 
 package org.lineageos.setupwizard;
 
+import static org.lineageos.setupwizard.SetupWizardApp.ACTION_SETUP_COMPLETE;
 import static org.lineageos.setupwizard.SetupWizardApp.DISABLE_NAV_KEYS;
 import static org.lineageos.setupwizard.SetupWizardApp.KEY_BUTTON_BACKLIGHT;
 import static org.lineageos.setupwizard.SetupWizardApp.KEY_SEND_METRICS;
@@ -42,6 +43,9 @@ import android.widget.ImageView;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.lineageos.setupwizard.util.EnableAccessibilityController;
+
+import static android.os.Binder.getCallingUserHandle;
+import static org.lineageos.setupwizard.Manifest.permission.FINISH_SETUP;
 
 public class FinishActivity extends BaseSetupWizardActivity {
 
@@ -98,6 +102,10 @@ public class FinishActivity extends BaseSetupWizardActivity {
     }
 
     private void startFinishSequence() {
+        Intent i = new Intent(ACTION_SETUP_COMPLETE);
+        i.setPackage(getPackageName());
+        sendBroadcastAsUser(i, getCallingUserHandle(), FINISH_SETUP);
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
         hideBackButton();
         hideNextButton();

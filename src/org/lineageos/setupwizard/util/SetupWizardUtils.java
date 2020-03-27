@@ -35,6 +35,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.ComponentInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -194,8 +195,8 @@ public class SetupWizardUtils {
     public static boolean hasGMS(Context context) {
         String gmsSuwPackage = hasLeanback(context) ? GMS_TV_SUW_PACKAGE : GMS_SUW_PACKAGE;
 
-        if (PackageManagerUtils.isAppInstalled(context, GMS_PACKAGE) &&
-                PackageManagerUtils.isAppInstalled(context, gmsSuwPackage)) {
+        if (isAppInstalled(context, GMS_PACKAGE) &&
+                isAppInstalled(context, gmsSuwPackage)) {
             PackageManager packageManager = context.getPackageManager();
             if (LOGV) {
                 Log.v(TAG, GMS_SUW_PACKAGE + " state = " +
@@ -401,5 +402,37 @@ public class SetupWizardUtils {
 
     public static long getBuildDateTimestamp() {
         return SystemProperties.getLong(PROP_BUILD_DATE, 0);
+    }
+
+
+    /**
+     * Checks whether a given package exists
+     *
+     * @param context
+     * @param packageName
+     * @return true if the package exists
+     */
+    public static boolean isAppInstalled(final Context context, final String packageName) {
+        return getApplicationInfo(context, packageName, 0) != null;
+    }
+
+    /**
+     * Get the ApplicationInfo of a package
+     *
+     * @param context
+     * @param packageName
+     * @param flags
+     * @return null if the package cannot be found or the ApplicationInfo is null
+     */
+    public static ApplicationInfo getApplicationInfo(final Context context,
+                                                     final String packageName, final int flags) {
+        final PackageManager packageManager = context.getPackageManager();
+        ApplicationInfo info;
+        try {
+            info = packageManager.getApplicationInfo(packageName, flags);
+        } catch (PackageManager.NameNotFoundException e) {
+            info = null;
+        }
+        return info;
     }
 }

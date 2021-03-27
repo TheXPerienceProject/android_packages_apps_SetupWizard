@@ -171,8 +171,8 @@ public class SetupWizardUtils {
     public static boolean hasGMS(Context context) {
         String gmsSuwPackage = hasLeanback(context) ? GMS_TV_SUW_PACKAGE : GMS_SUW_PACKAGE;
 
-        if (PackageManagerUtils.isAppInstalled(context, GMS_PACKAGE) &&
-                PackageManagerUtils.isAppInstalled(context, gmsSuwPackage)) {
+        if (isAppInstalled(context, GMS_PACKAGE) &&
+                isAppInstalled(context, gmsSuwPackage)) {
             PackageManager packageManager = context.getPackageManager();
             if (LOGV) {
                 Log.v(TAG, GMS_SUW_PACKAGE + " state = " +

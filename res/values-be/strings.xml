@@ -52,7 +52,6 @@
     <string name="enable_mobile_data_summary">Выкарыстоўваць мабільную сувязь падчас налады? Ўключэнне перадачы дадзеных па сотавых сетках можа пацягнуць выдаткі.</string>
     <string name="no">Не</string>
     <string name="yes">Так</string>
-    <string name="data_sim_name">SIM <xliff:g id="sub">%d</xliff:g> - <xliff:g id="name">%s</xliff:g></string>
     <string name="emergency_call">Экстранны выклік</string>
     <string name="services_privacy_policy">Палітыка прыватнасці</string>
     <string name="services_os_nav_keys_label"><b>Скарыстаць на экранные навігацыйныя кнопкі</b> заміж апаратных.</string>

@@ -54,7 +54,6 @@
     <string name="enable_mobile_data_summary">Wolle jo mobile gegevens brûke wylst it ynstellen? Hjirmei kinne kosten oan ferbûn wêze.</string>
     <string name="no">Nee</string>
     <string name="yes">Ja</string>
-    <string name="data_sim_name">SIM <xliff:g id="sub">%d</xliff:g> - <xliff:g id="name">%s</xliff:g></string>
     <string name="emergency_call">Needoprop</string>
     <string name="setup_services">Funksjes fan XPerience</string>
     <string name="services_explanation" product="tablet">Dizze tsjinsten wurde brûkt om de mooglikheden fan jo tablet út te wreidzjen. Gegevens wurde brûkt konfoarm it ‘<xliff:g id="name" example="Privacybelied">%s</xliff:g>’ fan XPerience.</string>

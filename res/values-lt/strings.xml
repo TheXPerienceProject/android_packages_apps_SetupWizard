@@ -48,7 +48,6 @@
     <string name="setup_mobile_data_emergency_only">Tik pagalbos skambučiai</string>
     <string name="no">Ne</string>
     <string name="yes">Taip</string>
-    <string name="data_sim_name">SIM <xliff:g id="sub">%d</xliff:g> - <xliff:g id="name">%s</xliff:g></string>
     <string name="emergency_call">Pagalbos skambutis</string>
     <string name="services_privacy_policy">Privatumo politika</string>
     <string name="services_os_nav_keys_label"><b>Naudokite ekrane rodomus naršymo klavišus</b> vietoj aparatūrinių klavišų.</string>

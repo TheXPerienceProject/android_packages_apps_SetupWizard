@@ -48,7 +48,6 @@
     <string name="setup_mobile_data_emergency_only">Just Noutriff</string>
     <string name="no">Nee</string>
     <string name="yes">Jo</string>
-    <string name="data_sim_name">SIM <xliff:g id="sub">%d</xliff:g> - <xliff:g id="name">%s</xliff:g></string>
     <string name="emergency_call">Noutruff</string>
     <string name="services_privacy_policy">Dateschutzerklärung</string>
     <string name="services_os_nav_keys_label"><b>Schierm-Navigatiounstasten</b> amplaz Hardwaretaste benotzen.</string>

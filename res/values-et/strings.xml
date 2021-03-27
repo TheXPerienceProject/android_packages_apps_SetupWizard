@@ -48,7 +48,6 @@
     <string name="setup_mobile_data_emergency_only">Üksnes hädaabikõned</string>
     <string name="no">Ei</string>
     <string name="yes">Jah</string>
-    <string name="data_sim_name">SIM <xliff:g id="sub">%d </xliff:g> - <xliff:g id="name">%s </xliff:g></string>
     <string name="emergency_call">Hädaabinumbril helistamine</string>
     <string name="services_privacy_policy">Privaatsuspoliitika</string>
     <string name="services_help_improve_cm">Aita parendada <xliff:g id="name" example="XPerience">%s</xliff:g>i</string>

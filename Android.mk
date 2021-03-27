@@ -28,6 +28,7 @@ LOCAL_JAVA_LIBRARIES := \
 LOCAL_RESOURCE_DIR := $(LOCAL_PATH)/res
 
 LOCAL_USE_AAPT2 := true
+LOCAL_AAPT_FLAGS += --rename-manifest-package mx.xperience.setupwizard
 
 LOCAL_REQUIRED_MODULES := privapp_whitelist_mx.xperience.setupwizard.xml
 

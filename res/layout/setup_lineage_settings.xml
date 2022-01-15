@@ -44,15 +44,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <!-- The caption about privacy policy -->
-                    <TextView
-                        android:id="@+id/privacy_policy"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/SudItemTitle.GlifDescription"
-                        android:text="@string/services_explanation"
-                        android:clickable="true" />
-
                     <!-- Whether or not to enable metrics -->
                     <LinearLayout
                         android:id="@+id/metrics"

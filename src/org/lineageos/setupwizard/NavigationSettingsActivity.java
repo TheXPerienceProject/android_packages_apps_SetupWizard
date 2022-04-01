@@ -30,6 +30,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.provider.Settings;
 import android.content.Context;
 import android.view.View;
 import android.widget.CheckBox;
@@ -39,8 +40,6 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.setupcompat.util.WizardManagerHelper;
-
-import lineageos.providers.LineageSettings;
 
 import org.lineageos.setupwizard.util.SetupWizardUtils;
 
@@ -65,7 +64,7 @@ public class NavigationSettingsActivity extends BaseSetupWizardActivity {
         }
 
         int deviceKeys = getResources().getInteger(
-                org.lineageos.platform.internal.R.integer.config_deviceHardwareKeys);
+                android.internal.R.integer.config_deviceHardwareKeys);
         boolean hasHomeKey = (deviceKeys & KEY_MASK_APP_SWITCH) != 0;
 
         getGlifLayout().setDescriptionText(getString(R.string.navigation_summary));
@@ -164,8 +163,8 @@ public class NavigationSettingsActivity extends BaseSetupWizardActivity {
     protected void onNextPressed() {
         mSetupWizardApp.getSettingsBundle().putString(NAVIGATION_OPTION_KEY, mSelection);
         boolean hideHint = mHideGesturalHint.isChecked();
-        LineageSettings.System.putIntForUser(getContentResolver(),
-                LineageSettings.System.NAVIGATION_BAR_HINT, hideHint ? 0 : 1,
+        Settings.System.putIntForUser(getContentResolver(),
+                Settings.System.NAVIGATION_BAR_HINT, hideHint ? 0 : 1,
                 UserHandle.USER_CURRENT);
         Intent intent = WizardManagerHelper.getNextIntent(getIntent(), Activity.RESULT_OK);
         nextAction(NEXT_REQUEST, intent);

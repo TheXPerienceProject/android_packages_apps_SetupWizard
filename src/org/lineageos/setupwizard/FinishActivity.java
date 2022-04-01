@@ -46,6 +46,7 @@ import android.os.Handler;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.UserHandle;
+import android.provider.Settings;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -186,13 +187,6 @@ public class FinishActivity extends BaseSetupWizardActivity {
         startActivityForResult(intent, NEXT_REQUEST);
     }
 
-    private static void handleNavKeys(SetupWizardApp setupWizardApp) {
-        if (setupWizardApp.getSettingsBundle().containsKey(DISABLE_NAV_KEYS)) {
-            writeDisableNavkeysOption(setupWizardApp,
-                    setupWizardApp.getSettingsBundle().getBoolean(DISABLE_NAV_KEYS));
-        }
-    }
-
     private static void handleRecoveryUpdate(SetupWizardApp setupWizardApp) {
         if (setupWizardApp.getSettingsBundle().containsKey(ENABLE_RECOVERY_UPDATE)) {
             boolean update = setupWizardApp.getSettingsBundle()
@@ -215,16 +209,4 @@ public class FinishActivity extends BaseSetupWizardActivity {
         }
     }
 
-    private static void writeDisableNavkeysOption(Context context, boolean enabled) {
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-
-        final boolean virtualKeysEnabled = LineageSettings.System.getIntForUser(
-                context.getContentResolver(), LineageSettings.System.FORCE_SHOW_NAVBAR, 0,
-                UserHandle.USER_CURRENT) != 0;
-        if (enabled != virtualKeysEnabled) {
-            LineageSettings.System.putIntForUser(context.getContentResolver(),
-                    LineageSettings.System.FORCE_SHOW_NAVBAR, enabled ? 1 : 0,
-                    UserHandle.USER_CURRENT);
-        }
-    }
 }

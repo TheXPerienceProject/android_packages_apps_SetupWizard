@@ -2,7 +2,7 @@
 
 <!--
      Copyright (C) 2016 The CyanogenMod Project
-     Copyright (C) 2017-2022 The LineageOS Project
+     Copyright (C) 2017-2021 The LineageOS Project
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -51,11 +51,7 @@
         <result wizard:action="recovery_update" />
     </WizardAction>
 
-    <WizardAction wizard:uri="intent:#Intent;action=org.lineageos.setupwizard.LINEAGE_RECOVERY_UPDATE;end" id="recovery_update">
-        <result wizard:action="navigation_settings" />
-    </WizardAction>
-
-    <WizardAction wizard:uri="intent:#Intent;action=org.lineageos.setupwizard.NAVIGATION_SETTINGS;end" id="navigation_settings">
+    <WizardAction wizard:uri="intent:#Intent;action=org.lineageos.setupwizard.LINEAGE_SETTINGS;end" id="recovery_update">
         <result wizard:action="biometric_settings" />
     </WizardAction>
 

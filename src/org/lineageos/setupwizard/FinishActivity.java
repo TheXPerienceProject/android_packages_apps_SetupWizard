@@ -24,11 +24,9 @@ import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL_OV
 
 import static org.lineageos.setupwizard.Manifest.permission.FINISH_SETUP;
 import static org.lineageos.setupwizard.SetupWizardApp.ACTION_SETUP_COMPLETE;
-import static org.lineageos.setupwizard.SetupWizardApp.DISABLE_NAV_KEYS;
 import static org.lineageos.setupwizard.SetupWizardApp.ENABLE_RECOVERY_UPDATE;
 import static org.lineageos.setupwizard.SetupWizardApp.KEY_SEND_METRICS;
 import static org.lineageos.setupwizard.SetupWizardApp.LOGV;
-import static org.lineageos.setupwizard.SetupWizardApp.NAVIGATION_OPTION_KEY;
 import static org.lineageos.setupwizard.SetupWizardApp.UPDATE_RECOVERY_PROP;
 
 import android.animation.Animator;
@@ -173,7 +171,6 @@ public class FinishActivity extends BaseSetupWizardActivity {
     }
 
     private void completeSetup() {
-        handleNavigationOption(mSetupWizardApp);
         final WallpaperManager wallpaperManager =
                 WallpaperManager.getInstance(mSetupWizardApp);
         wallpaperManager.forgetLoadedWallpaper();
@@ -184,29 +181,4 @@ public class FinishActivity extends BaseSetupWizardActivity {
         startActivityForResult(intent, NEXT_REQUEST);
     }
 
-    private void handleNavigationOption(Context context) {
-        Bundle settingsBundle = mSetupWizardApp.getSettingsBundle();
-        if (settingsBundle.containsKey(NAVIGATION_OPTION_KEY)) {
-            IOverlayManager overlayManager = IOverlayManager.Stub.asInterface(
-                    ServiceManager.getService(Context.OVERLAY_SERVICE));
-            String selectedNavMode = settingsBundle.getString(NAVIGATION_OPTION_KEY);
-
-            try {
-                overlayManager.setEnabledExclusiveInCategory(selectedNavMode, USER_CURRENT);
-            } catch (Exception e) {}
-        }
-    }
-
-    private static void writeDisableNavkeysOption(Context context, boolean enabled) {
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-
-        final boolean virtualKeysEnabled = LineageSettings.System.getIntForUser(
-                context.getContentResolver(), LineageSettings.System.FORCE_SHOW_NAVBAR, 0,
-                UserHandle.USER_CURRENT) != 0;
-        if (enabled != virtualKeysEnabled) {
-            LineageSettings.System.putIntForUser(context.getContentResolver(),
-                    LineageSettings.System.FORCE_SHOW_NAVBAR, enabled ? 1 : 0,
-                    UserHandle.USER_CURRENT);
-        }
-    }
 }

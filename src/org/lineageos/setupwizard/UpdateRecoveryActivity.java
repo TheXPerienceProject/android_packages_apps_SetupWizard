@@ -32,11 +32,6 @@ public class UpdateRecoveryActivity extends BaseSetupWizardActivity {
                 getString(R.string.update_recovery_description),
                 getString(R.string.update_recovery_warning)));
 
-        if (!SetupWizardUtils.hasRecoveryUpdater(this)) {
-            Log.v(TAG, "No recovery updater, skipping UpdateRecoveryActivity");
-            finishAction(RESULT_SKIP);
-            return;
-        }
 
         setNextText(R.string.next);
         mRecoveryUpdateCheckbox = findViewById(R.id.update_recovery_checkbox);

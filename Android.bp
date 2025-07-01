@@ -4,7 +4,7 @@
 //
 
 android_app {
-    name: "LineageSetupWizard",
+    name: "XPerienceSetupWizard",
 
     srcs: ["src/**/*.java"],
 
@@ -25,7 +25,6 @@ android_app {
         "setupcompat",
         "setupdesign",
         "SystemUISharedLib",
-        "org.lineageos.platform.internal",
     ],
 
     libs: ["telephony-common"],

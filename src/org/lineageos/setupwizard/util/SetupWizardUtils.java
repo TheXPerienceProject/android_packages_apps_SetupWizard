@@ -18,12 +18,8 @@ import static com.android.internal.telephony.PhoneConstants.LTE_ON_CDMA_UNKNOWN;
 
 import static com.google.android.setupcompat.util.ResultCodes.RESULT_SKIP;
 
-import static org.lineageos.setupwizard.SetupWizardApp.DISABLE_NAV_KEYS;
-import static org.lineageos.setupwizard.SetupWizardApp.ENABLE_RECOVERY_UPDATE;
-import static org.lineageos.setupwizard.SetupWizardApp.KEY_SEND_METRICS;
 import static org.lineageos.setupwizard.SetupWizardApp.LOGV;
 import static org.lineageos.setupwizard.SetupWizardApp.NAVIGATION_OPTION_KEY;
-import static org.lineageos.setupwizard.SetupWizardApp.UPDATE_RECOVERY_PROP;
 
 import android.app.StatusBarManager;
 import android.app.WallpaperManager;
@@ -63,10 +59,8 @@ public class SetupWizardUtils {
     private static final String GMS_PACKAGE = "com.google.android.gms";
     private static final String GMS_SUW_PACKAGE = "com.google.android.setupwizard";
     private static final String GMS_TV_SUW_PACKAGE = "com.google.android.tungsten.setupwraith";
-    private static final String UPDATER_PACKAGE = "org.lineageos.updater";
+    private static final String UPDATER_PACKAGE = "mx.xperience.updater";
 
-    private static final String UPDATE_RECOVERY_EXEC = "/vendor/bin/install-recovery.sh";
-    private static final String CONFIG_HIDE_RECOVERY_UPDATE = "config_hideRecoveryUpdate";
     private static final String PROP_BUILD_DATE = "ro.build.date.utc";
 
     private SetupWizardUtils() {

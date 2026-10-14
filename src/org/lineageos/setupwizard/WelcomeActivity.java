@@ -11,9 +11,17 @@ import static org.lineageos.setupwizard.SetupWizardApp.ACTION_EMERGENCY_DIAL;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Build;
+import android.provider.Settings;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.setupcompat.template.FooterButtonStyleUtils;
 import com.google.android.setupcompat.util.SystemBarHelper;
@@ -42,6 +50,16 @@ public class WelcomeActivity extends SubBaseActivity {
         findViewById(R.id.launch_accessibility)
                 .setOnClickListener(
                         view -> startSubactivity(new Intent(ACTION_ACCESSIBILITY_SETTINGS)));
+
+        View.OnClickListener brightnessListener = view -> showBrightnessDialog();
+        View launchBrightness = findViewById(R.id.launch_brightness);
+        if (launchBrightness != null) {
+            launchBrightness.setOnClickListener(brightnessListener);
+        }
+        ImageButton actionBrightness = findViewById(R.id.action_brightness);
+        if (actionBrightness != null) {
+            actionBrightness.setOnClickListener(brightnessListener);
+        }
 
         FooterButtonStyleUtils.applyPrimaryButtonPartnerResource(this, startButton, true);
 
@@ -83,5 +101,54 @@ public class WelcomeActivity extends SubBaseActivity {
     @Override
     protected int getTitleResId() {
         return -1;
+    }
+
+    private void showBrightnessDialog() {
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_brightness, null);
+        SeekBar slider = dialogView.findViewById(R.id.brightness_slider);
+        Switch adaptiveSwitch = dialogView.findViewById(R.id.adaptive_brightness_switch);
+
+        int currentMode = Settings.System.getInt(getContentResolver(),
+                Settings.System.SCREEN_BRIGHTNESS_MODE,
+                Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+        boolean isAdaptive = (currentMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
+        adaptiveSwitch.setChecked(isAdaptive);
+
+        int currentBrightness = Settings.System.getInt(getContentResolver(),
+                Settings.System.SCREEN_BRIGHTNESS, 128);
+        slider.setProgress(Math.max(5, currentBrightness));
+
+        slider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (fromUser) {
+                    int val = Math.max(5, progress);
+                    Settings.System.putInt(getContentResolver(),
+                            Settings.System.SCREEN_BRIGHTNESS, val);
+                    WindowManager.LayoutParams lp = getWindow().getAttributes();
+                    lp.screenBrightness = val / 255.0f;
+                    getWindow().setAttributes(lp);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+
+        adaptiveSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS_MODE,
+                    isChecked ? Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
+                              : Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+        });
+
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.display_brightness)
+                .setView(dialogView)
+                .setPositiveButton(R.string.done, null)
+                .show();
     }
 }

@@ -85,6 +85,20 @@
                         android:textSize="@dimen/welcome_accessibility_text_size"
                         android:textColor="?android:textColorPrimary"
                         android:text="@string/accessibility_settings" />
+
+                    <Button
+                        android:id="@+id/launch_brightness"
+                        style="@style/SudGlifButton.Secondary"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="8dp"
+                        android:drawableStart="@drawable/ic_brightness"
+                        android:gravity="start|center"
+                        android:drawablePadding="@dimen/welcome_content_container_padding_end"
+                        android:textSize="@dimen/welcome_accessibility_text_size"
+                        android:textColor="?android:textColorPrimary"
+                        android:text="@string/display_brightness" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -129,4 +143,16 @@
                 android:text="@string/start" />
         </LinearLayout>
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/action_brightness"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_brightness"
+        android:tint="?android:textColorPrimary"
+        android:contentDescription="@string/display_brightness" />
 </com.google.android.setupdesign.GlifLayout>

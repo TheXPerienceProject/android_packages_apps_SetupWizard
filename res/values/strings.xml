@@ -26,6 +26,8 @@
     <string name="setup_managed_profile_welcome_message">Set up your work profile</string>
     <string name="emergency_call">Emergency call</string>
     <string name="accessibility_settings">Accessibility settings</string>
+    <string name="display_brightness">Display brightness</string>
+    <string name="adaptive_brightness">Adaptive brightness</string>
 
     <!-- Locale page -->
     <string name="setup_locale">Language</string>

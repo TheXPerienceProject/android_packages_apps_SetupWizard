@@ -265,7 +265,7 @@ public abstract class BaseSetupWizardActivity extends AppCompatActivity implemen
         return intent
                 .putExtra(WizardManagerHelper.EXTRA_IS_FIRST_RUN, isFirstRun())
                 .putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true)
-                .putExtra(WizardManagerHelper.EXTRA_THEME, ThemeHelper.THEME_GLIF_V4);
+                .putExtra(WizardManagerHelper.EXTRA_THEME, ThemeHelper.THEME_GLIF_EXPRESSIVE);
     }
 
     @Override

@@ -20,6 +20,10 @@ import com.google.android.setupcompat.util.SystemBarHelper
 import com.google.android.setupdesign.R as SudR
 import com.google.android.setupdesign.template.FloatingActionButtonMixin
 import com.google.android.setupdesign.template.FloatingBackButtonMixin
+import android.provider.Settings
+import android.widget.SeekBar
+import android.widget.Switch
+import androidx.appcompat.app.AlertDialog
 import org.lineageos.setupwizard.base.GlifTemplate
 import org.lineageos.setupwizard.base.SubBaseActivity
 import org.lineageos.setupwizard.system.DeviceInfoActivity
@@ -55,6 +59,9 @@ class WelcomeActivity : SubBaseActivity() {
         findViewById<View>(R.id.start).setOnClickListener { onNextPressed() }
         findViewById<View>(R.id.launch_accessibility).setOnClickListener {
             startSubactivity(Intent(ACTION_ACCESSIBILITY_SETTINGS))
+        }
+        findViewById<View>(R.id.launch_brightness)?.setOnClickListener {
+            showBrightnessDialog()
         }
 
         val welcomeTitle: TextView = findViewById(R.id.welcome_title)
@@ -142,6 +149,56 @@ class WelcomeActivity : SubBaseActivity() {
             iconPadding = resources.getDimensionPixelSize(R.dimen.welcome_emergency_icon_padding)
             applyChipStyle(getString(R.string.emergency_call))
         }
+    }
+
+    private fun showBrightnessDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_brightness, null)
+        val slider = dialogView.findViewById<SeekBar>(R.id.brightness_slider)
+        val adaptiveSwitch = dialogView.findViewById<Switch>(R.id.adaptive_brightness_switch)
+
+        val currentMode = Settings.System.getInt(
+            contentResolver,
+            Settings.System.SCREEN_BRIGHTNESS_MODE,
+            Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL,
+        )
+        adaptiveSwitch.isChecked = currentMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
+
+        val currentBrightness = Settings.System.getInt(
+            contentResolver,
+            Settings.System.SCREEN_BRIGHTNESS,
+            128,
+        )
+        slider.progress = maxOf(5, currentBrightness)
+
+        slider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    val value = maxOf(5, progress)
+                    Settings.System.putInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS, value)
+                    val lp = window.attributes
+                    lp.screenBrightness = value / 255f
+                    window.attributes = lp
+                }
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+
+        adaptiveSwitch.setOnCheckedChangeListener { _, isChecked ->
+            Settings.System.putInt(
+                contentResolver,
+                Settings.System.SCREEN_BRIGHTNESS_MODE,
+                if (isChecked) Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
+                else Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL,
+            )
+        }
+
+        AlertDialog.Builder(this)
+            .setTitle(R.string.display_brightness)
+            .setView(dialogView)
+            .setPositiveButton(R.string.done, null)
+            .show()
     }
 
     override val layoutResId = R.layout.welcome_activity

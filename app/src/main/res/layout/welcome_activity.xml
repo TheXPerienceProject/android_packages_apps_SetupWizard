@@ -18,16 +18,17 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2" />
+            android:layout_weight="1" />
 
-        <com.google.android.setupdesign.view.SudLottieAnimationView
+        <ImageView
             android:id="@+id/brand_logo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="3"
             android:adjustViewBounds="true"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/lottie_welcome" />
+            android:padding="@dimen/content_margin_left"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo" />
 
         <Space
             android:layout_width="match_parent"
@@ -69,6 +70,18 @@
                 android:layout_marginEnd="@dimen/welcome_footer_button_spacing"
                 android:contentDescription="@string/accessibility_settings"
                 app:icon="@drawable/ic_accessibility"
+                app:iconSize="@dimen/welcome_accessibility_icon_size"
+                app:iconTint="?attr/colorOnSurface" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/launch_brightness"
+                style="@style/WelcomeIconButton"
+                android:layout_width="@dimen/welcome_footer_button_size"
+                android:layout_height="@dimen/welcome_footer_button_size"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/welcome_footer_button_spacing"
+                android:contentDescription="@string/display_brightness"
+                app:icon="@drawable/ic_brightness"
                 app:iconSize="@dimen/welcome_accessibility_icon_size"
                 app:iconTint="?attr/colorOnSurface" />
 

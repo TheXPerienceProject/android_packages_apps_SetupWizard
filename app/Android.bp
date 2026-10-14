@@ -4,7 +4,7 @@
 //
 
 android_app {
-    name: "LineageSetupWizard",
+    name: "XPerienceSetupWizard",
 
     srcs: ["src/main/java/**/*.kt"],
     resource_dirs: ["src/main/res"],
@@ -31,7 +31,6 @@ android_app {
         "setupdesign-lottie-animation-view",
         "SystemUISharedLib",
         "zxing-core",
-        "org.lineageos.platform.internal",
     ],
 
     libs: ["telephony-common"],

@@ -3,7 +3,7 @@ SPDX-FileCopyrightText: The LineageOS Project
 SPDX-License-Identifier: Apache-2.0
 -->
 
-LineageOS SetupWizard
+XPerience SetupWizard
 =====================
 
 Build with Android Studio

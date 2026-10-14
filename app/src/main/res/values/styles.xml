@@ -9,6 +9,13 @@
     <style name="Theme.Setup" parent="@style/SudThemeGlifExpressive.DayNight">
         <item name="sucUsePartnerResource">true</item>
         <item name="sudUsePartnerHeavyTheme">true</item>
+        <item name="sudGlifDescriptionStyle">@style/XPeSudGlifDescription</item>
+    </style>
+
+    <style name="XPeSudGlifDescription" parent="SudGlifDescriptionExpressive">
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineHeight">24sp</item>
+        <item name="fontFamily">sans-serif</item>
     </style>
 
     <!-- TV -->

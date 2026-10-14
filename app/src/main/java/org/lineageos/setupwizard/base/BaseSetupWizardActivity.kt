@@ -210,7 +210,11 @@ abstract class BaseSetupWizardActivity : AppCompatActivity() {
         require(resultCode != RESULT_CANCELED) { "Cannot call nextAction with RESULT_CANCELED" }
         setResult(resultCode, data)
         val nextIntent = WizardManagerHelper.getNextIntent(intent, resultCode, data)
-        nextIntentResultLauncher.launch(nextIntent)
+        if (nextIntent != null) {
+            nextIntentResultLauncher.launch(nextIntent)
+        } else {
+            finish()
+        }
     }
 
     /** Adorn the Intent with Setup Wizard-related extras. */

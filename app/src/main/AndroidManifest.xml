@@ -110,6 +110,7 @@
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="org.lineageos.setupwizard.LINEAGE_WELCOME" />
+                <action android:name="com.android.setupwizard.OEM_PRE_SETUP" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

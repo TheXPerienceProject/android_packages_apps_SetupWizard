@@ -12,10 +12,9 @@ import android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON_OVERLAY
 import android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL_OVERLAY
 import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.button.MaterialButton
+import android.provider.Settings
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.materialswitch.MaterialSwitch
-import lineageos.providers.LineageSettings
-import org.lineageos.internal.util.DeviceKeysConstants.KEY_MASK_APP_SWITCH
 import org.lineageos.setupwizard.DISABLE_NAV_KEYS
 import org.lineageos.setupwizard.NAVIGATION_OPTION_KEY
 import org.lineageos.setupwizard.R
@@ -36,11 +35,8 @@ class NavigationSettingsActivity : BaseSetupWizardActivity() {
 
         val navBarEnabled = SetupWizardApp.settingsBundle.getBoolean(DISABLE_NAV_KEYS, false)
 
-        val deviceKeys =
-            resources.getInteger(
-                org.lineageos.platform.internal.R.integer.config_deviceHardwareKeys
-            )
-        val hasHomeKey = (deviceKeys and KEY_MASK_APP_SWITCH) != 0
+        val deviceKeys = 0
+        val hasHomeKey = false
 
         setDescriptionText(getString(R.string.navigation_summary))
 
@@ -104,9 +100,9 @@ class NavigationSettingsActivity : BaseSetupWizardActivity() {
     override fun onNextPressed() {
         SetupWizardApp.settingsBundle.putString(NAVIGATION_OPTION_KEY, selection)
         val hideHint = hideGesturalHint.isChecked
-        LineageSettings.System.putIntForUser(
+        Settings.System.putIntForUser(
             contentResolver,
-            LineageSettings.System.NAVIGATION_BAR_HINT,
+            "navigation_bar_hint",
             if (hideHint) 0 else 1,
             UserHandle.USER_CURRENT,
         )

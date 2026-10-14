@@ -36,10 +36,7 @@ import android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL
 import android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL_OVERLAY
 import com.google.android.setupcompat.util.ResultCodes.RESULT_SKIP
 import java.io.File
-import lineageos.hardware.LineageHardwareManager
-import lineageos.providers.LineageSettings
 import org.json.JSONObject
-import org.lineageos.internal.util.DeviceKeysConstants.KEY_MASK_APP_SWITCH
 import org.lineageos.setupwizard.DISABLE_NAV_KEYS
 import org.lineageos.setupwizard.ENABLE_RECOVERY_UPDATE
 import org.lineageos.setupwizard.KEY_SEND_METRICS
@@ -152,13 +149,7 @@ object SetupWizardUtils {
         if (!isPackageInstalled(context, NAV_BAR_MODE_GESTURAL_OVERLAY)) {
             return
         }
-        val deviceKeys =
-            context.resources.getInteger(
-                org.lineageos.platform.internal.R.integer.config_deviceHardwareKeys
-            )
-        if ((deviceKeys and KEY_MASK_APP_SWITCH) != 0) {
-            return
-        }
+        val deviceKeys = 0
         val navigationMode =
             Settings.Secure.getInt(context.contentResolver, Settings.Secure.NAVIGATION_MODE, 0)
         if (navigationMode == NAV_BAR_MODE_GESTURAL) {
@@ -310,14 +301,7 @@ object SetupWizardUtils {
     }
 
     private fun handleEnableMetrics(context: Context) {
-        val privacyData = SetupWizardApp.settingsBundle
-        if (privacyData.containsKey(KEY_SEND_METRICS)) {
-            LineageSettings.Secure.putInt(
-                context.contentResolver,
-                LineageSettings.Secure.STATS_COLLECTION,
-                if (privacyData.getBoolean(KEY_SEND_METRICS)) 1 else 0,
-            )
-        }
+        // No-op
     }
 
     private fun handleNavKeys(context: Context) {
@@ -351,23 +335,7 @@ object SetupWizardUtils {
     }
 
     private fun writeDisableNavkeysOption(context: Context, enabled: Boolean) {
-        val virtualKeysEnabled =
-            LineageSettings.System.getIntForUser(
-                context.contentResolver,
-                LineageSettings.System.FORCE_SHOW_NAVBAR,
-                0,
-                UserHandle.USER_CURRENT,
-            ) != 0
-        if (enabled != virtualKeysEnabled) {
-            LineageSettings.System.putIntForUser(
-                context.contentResolver,
-                LineageSettings.System.FORCE_SHOW_NAVBAR,
-                if (enabled) 1 else 0,
-                UserHandle.USER_CURRENT,
-            )
-            val hardware = LineageHardwareManager.getInstance(context)
-            hardware.set(LineageHardwareManager.FEATURE_KEY_DISABLE, enabled)
-        }
+        // No-op for devices without hardware navigation keys
     }
 
     fun getBuildDateTimestamp(): Long = SystemProperties.getLong(PROP_BUILD_DATE, 0)
